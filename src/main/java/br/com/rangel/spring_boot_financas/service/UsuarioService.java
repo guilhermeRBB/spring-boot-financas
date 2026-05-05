@@ -1,0 +1,28 @@
+package br.com.rangel.spring_boot_financas.service;
+
+import br.com.rangel.spring_boot_financas.model.Usuario;
+import br.com.rangel.spring_boot_financas.repository.UsuarioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class UsuarioService {
+    
+    @Autowired
+    private UsuarioRepository repository;
+
+    public Usuario cadastrar(Usuario usuario) {
+
+        // verificar se existe user com este email
+        repository.findByEmail(usuario.getEmail())
+                .ifPresent(u -> {
+                    throw new RuntimeException("Email ja cadastrado");
+                });
+        return repository.save(usuario);        
+    }
+
+    public Usuario buscarPorEmail(String email) {
+        return repository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Usuario não encontrado"));
+    }
+}
