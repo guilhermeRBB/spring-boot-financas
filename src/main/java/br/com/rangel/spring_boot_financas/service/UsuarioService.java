@@ -25,4 +25,18 @@ public class UsuarioService {
         return repository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("Usuario não encontrado"));
     }
+
+    public Usuario buscarPorId(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuario não encontrado"));
+    }
+
+    public Usuario atualizar(Long id, Usuario usuarioAtualizado) {
+        Usuario usuario = buscarPorId(id);
+        usuario.setNome(usuarioAtualizado.getNome());
+        usuario.setEmail(usuarioAtualizado.getEmail());
+        usuario.setSenha(usuarioAtualizado.getSenha());
+
+        return repository.save(usuario);
+    }
 }

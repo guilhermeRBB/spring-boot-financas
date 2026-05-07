@@ -14,6 +14,17 @@ public class UsuarioController {
 
     @PostMapping
     public Usuario cadastrar(@RequestBody Usuario usuario) {
+
         return service.cadastrar(usuario);
+    }
+
+    @GetMapping("/{id}")
+    public Usuario buscarPorId(@PathVariable Long id) {
+        return service.buscarPorId(id);
+    }
+
+    @PutMapping("/{id}")
+    public Usuario atualizar(@PathVariable Long id, @RequestBody Usuario usuarioAtualizado) {
+        return service.atualizar(id, usuarioAtualizado);
     }
 }
