@@ -5,6 +5,8 @@ import br.com.rangel.spring_boot_financas.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UsuarioService {
     
@@ -38,5 +40,14 @@ public class UsuarioService {
         usuario.setSenha(usuarioAtualizado.getSenha());
 
         return repository.save(usuario);
+    }
+
+    public void deletar(Long id) {
+        buscarPorId(id);
+        repository.deleteById(id);
+    }
+
+    public List<Usuario> listarTodos() {
+        return repository.findAll();
     }
 }

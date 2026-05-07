@@ -2,8 +2,11 @@ package br.com.rangel.spring_boot_financas.controller;
 
 import br.com.rangel.spring_boot_financas.model.Usuario;
 import br.com.rangel.spring_boot_financas.service.UsuarioService;
+import br.com.rangel.spring_boot_financas.dto.UsuarioDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/usuarios")
@@ -13,18 +16,30 @@ public class UsuarioController {
     private UsuarioService service;
 
     @PostMapping
-    public Usuario cadastrar(@RequestBody Usuario usuario) {
-
-        return service.cadastrar(usuario);
+    public UsuarioDTO cadastrar(@RequestBody Usuario usuario) {
+        return UsuarioDTO.fromEntity(service.cadastrar(usuario));
     }
 
     @GetMapping("/{id}")
-    public Usuario buscarPorId(@PathVariable Long id) {
-        return service.buscarPorId(id);
+    public UsuarioDTO buscarPorId(@PathVariable Long id) {
+        return UsuarioDTO.fromEntity(service.buscarPorId(id));
     }
 
     @PutMapping("/{id}")
-    public Usuario atualizar(@PathVariable Long id, @RequestBody Usuario usuarioAtualizado) {
-        return service.atualizar(id, usuarioAtualizado);
+    public UsuarioDTO atualizar(@PathVariable Long id, @RequestBody Usuario usuario) {
+        return UsuarioDTO.fromEntity(service.atualizar(id, usuario));
+    }
+
+    @DeleteMapping("/{id}")
+    public void deletar(@PathVariable Long id){
+        service.deletar(id);
+    }
+
+    @GetMapping
+    public List<UsuarioDTO> listarTodos() {
+        return service.listarTodos()
+                .stream()
+                .map(UsuarioDTO::fromEntity)
+                .toList();
     }
 }
