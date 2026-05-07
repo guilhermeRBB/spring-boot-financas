@@ -11,13 +11,14 @@ API REST para gerenciamento de finanças pessoais, desenvolvida com Spring Boot 
 - Maven
 
 ## ✅ Funcionalidades
-- Cadastro, busca e atualização de usuários
+- CRUD completo de usuários
 - CRUD completo de lançamentos financeiros
 - Vinculação de lançamentos a usuários
 - Filtros dinâmicos por mês, tipo e categoria
 - Listagem de lançamentos por usuário
 - Resumo financeiro com total de receitas, despesas e saldo
 - Respostas seguras com DTO (sem exposição de senha)
+- Deleção em cascata — ao deletar usuário, seus lançamentos são removidos automaticamente
 
 ## ⚙️ Como rodar localmente
 
@@ -32,9 +33,11 @@ API REST para gerenciamento de finanças pessoais, desenvolvida com Spring Boot 
 ### Usuários
 | Método | Rota | Descrição |
 |---|---|---|
-| POST | /usuarios | Cadastrar usuário |
+| GET | /usuarios | Listar todos os usuários |
 | GET | /usuarios/{id} | Buscar usuário por id |
+| POST | /usuarios | Cadastrar usuário |
 | PUT | /usuarios/{id} | Atualizar usuário |
+| DELETE | /usuarios/{id} | Deletar usuário e seus lançamentos |
 
 ### Lançamentos
 | Método | Rota | Descrição |
@@ -64,4 +67,4 @@ API REST para gerenciamento de finanças pessoais, desenvolvida com Spring Boot 
     "totalDespesas": 1270.00,
     "saldo": 2230.00
 }
-```
+```   
