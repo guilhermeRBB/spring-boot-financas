@@ -11,7 +11,7 @@ API REST para gerenciamento de finanças pessoais, desenvolvida com Spring Boot 
 - Maven
 
 ## ✅ Funcionalidades
-- Cadastro de usuários
+- Cadastro, busca e atualização de usuários
 - CRUD completo de lançamentos financeiros
 - Vinculação de lançamentos a usuários
 - Filtros dinâmicos por mês, tipo e categoria
@@ -23,18 +23,18 @@ API REST para gerenciamento de finanças pessoais, desenvolvida com Spring Boot 
 
 1. Clone o repositório
 2. Crie um banco de dados MySQL chamado `financas`
-3. Copie o arquivo de configuração:
-   cp src/main/resources/application.properties.example src/main/resources/application.properties
+3. Copie o arquivo de configuração: cp src/main/resources/application.properties.example src/main/resources/application.properties
 4. Preencha suas credenciais no `application.properties`
-5. Rode o projeto:
-   ./mvnw spring-boot:run
-   
+5. Rode o projeto: ./mvnw spring-boot:run
+
 ## 📌 Endpoints
 
 ### Usuários
 | Método | Rota | Descrição |
 |---|---|---|
 | POST | /usuarios | Cadastrar usuário |
+| GET | /usuarios/{id} | Buscar usuário por id |
+| PUT | /usuarios/{id} | Atualizar usuário |
 
 ### Lançamentos
 | Método | Rota | Descrição |
