@@ -2,6 +2,8 @@ package br.com.rangel.spring_boot_financas.controller;
 
 import br.com.rangel.spring_boot_financas.dto.LancamentoDTO;
 import br.com.rangel.spring_boot_financas.model.Lancamento;
+import br.com.rangel.spring_boot_financas.controller.LancamentoController;
+import br.com.rangel.spring_boot_financas.dto.ResumoDTO;
 import br.com.rangel.spring_boot_financas.service.LancamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -43,6 +45,14 @@ public class LancamentoController {
         service.deletar(id);
     }
 
+    @GetMapping("/usuario/{usuarioId}")
+    public List<LancamentoDTO> listarPorUsuario(@PathVariable Long usuarioId) {
+        return service.listarPorUsuario(usuarioId)
+                .stream()
+                .map(LancamentoDTO::fromEntity)
+                .toList();
+    }
+
     @GetMapping("/filtrar")
     public List<LancamentoDTO> filtrar(
         @RequestParam Long usuarioId,
@@ -54,5 +64,10 @@ public class LancamentoController {
             .stream()
             .map(LancamentoDTO::fromEntity)
             .toList();
+    }
+
+    @GetMapping("/resumo/{usuarioId}")
+    public ResumoDTO resumo(@PathVariable Long usuarioId) {
+        return service.calcularResumo(usuarioId);
     }
 }
