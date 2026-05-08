@@ -6,6 +6,8 @@ import br.com.rangel.spring_boot_financas.dto.UsuarioDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import jakarta.validation.Valid;
+
 import java.util.List;
 
 @RestController
@@ -16,7 +18,7 @@ public class UsuarioController {
     private UsuarioService service;
 
     @PostMapping
-    public UsuarioDTO cadastrar(@RequestBody Usuario usuario) {
+    public UsuarioDTO cadastrar(@Valid @RequestBody Usuario usuario) {
         return UsuarioDTO.fromEntity(service.cadastrar(usuario));
     }
 

@@ -8,6 +8,8 @@ import br.com.rangel.spring_boot_financas.service.LancamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import jakarta.validation.Valid;
+
 import java.util.List;
 
 @RestController
@@ -26,7 +28,7 @@ public class LancamentoController {
     }
 
     @PostMapping
-    public LancamentoDTO salvar(@RequestBody Lancamento lancamento) {
+    public LancamentoDTO salvar(@Valid @RequestBody Lancamento lancamento) {
         return LancamentoDTO.fromEntity(service.salvar(lancamento));
     }
 
@@ -36,7 +38,7 @@ public class LancamentoController {
     }
 
     @PutMapping("/{id}")
-    public LancamentoDTO atualizar(@PathVariable Long id, @RequestBody Lancamento lancamento) {
+    public LancamentoDTO atualizar(@Valid @PathVariable Long id, @RequestBody Lancamento lancamento) {
         return LancamentoDTO.fromEntity(service.atualizar(id, lancamento));
     }
 
